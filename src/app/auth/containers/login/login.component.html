@@ -1,0 +1,35 @@
+<div class="login-container">
+  <mat-card class="login-card">
+    <div class="login-card--logo">
+      <img src="/assets/img/logo.png" class="login-card--logo"/>
+    </div>
+    <mat-card-header class="login-card--header">
+      <mat-card-title class="login-card--title">Operational Client</mat-card-title>
+      <mat-card-subtitle class="login-card--subtitle">Login to your account</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div>
+          <mat-form-field class="login-card--form-field">
+            <input class="login-card--input" type="text" formControlName="username" placeholder="Username" matInput/>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="login-card--form-field">
+            <input class="login-card--input" type="password" formControlName="password" placeholder="Password"
+                   matInput/>
+          </mat-form-field>
+        </div>
+        <mat-error *ngIf="error$ | async" class="login-card--error">
+          {{error$ | async}}
+        </mat-error>
+        <div>
+          <button type="submit" class="login-card--submit" mat-flat-button color="primary">Login</button>
+        </div>
+      </form>
+    </mat-card-content>
+    <mat-card-footer>
+      <span class="login-card--copyright">Anagog © 2019. Operational Client | All rights reserved</span>
+    </mat-card-footer>
+  </mat-card>
+</div>

@@ -1,0 +1,26 @@
+.example-tree-invisible {
+  display: none;
+}
+
+.example-tree ul,
+.example-tree li {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-tree {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.button-wrapper {
+  margin-top: 15px;
+  button {
+    margin-right: 10px;
+  }
+}

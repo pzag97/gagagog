@@ -1,0 +1,11 @@
+.create-form {
+  &--field {
+    width: 100%;
+  }
+  &--buttons {
+    margin-top: 15px;
+    button {
+      margin-right: 5px;
+    }
+  }
+}

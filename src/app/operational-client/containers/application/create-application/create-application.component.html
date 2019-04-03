@@ -1,0 +1,15 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="create-form">
+  <mat-form-field class="create-form--field">
+    <mat-label>Application Name</mat-label>
+    <input type="text" formControlName="name" placeholder="com.example.project" matInput/>
+  </mat-form-field>
+  <mat-error *ngIf="error$ | async">{{error$ | async}}</mat-error>
+  <div class="create-form--buttons">
+    <button mat-button mat-raised-button color="primary">
+      Create
+    </button>
+    <button mat-button type="button" (click)="cancel()">
+      Cancel
+    </button>
+  </div>
+</form>

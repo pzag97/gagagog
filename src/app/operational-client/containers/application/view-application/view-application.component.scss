@@ -1,0 +1,24 @@
+form {
+  ::ng-deep .mat-figure {
+    justify-content: flex-start;
+  }
+}
+
+.upload-button {
+  cursor: pointer;
+  position: relative;
+  input {
+    visibility: hidden;
+    height: 0;
+    width: 0;
+    position: absolute;
+  }
+  label {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    cursor: pointer;
+  }
+}

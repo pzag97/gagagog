@@ -1,0 +1,86 @@
+<form [formGroup]="form" *ngIf="form">
+  <!-- select-app -->
+  <mat-grid-list [cols]="3" rowHeight="100px">
+    <mat-grid-tile>
+      <h4>Application Name</h4>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-form-field>
+        <mat-select placeholder="Select Application"
+                    formControlName="app">
+          <mat-option>-- Select Application --</mat-option>
+          <mat-option *ngFor="let app of (applications$ | async)" [value]="app">
+            {{app.AppName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <button *ngIf="!selectedApplication; else deleteButton" mat-button
+              mat-raised-button color="primary" (click)="createApp()">
+        Create new
+      </button>
+      <ng-template #deleteButton>
+        <button mat-button mat-raised-button color="warn" (click)="deleteApp()">
+          Delete Application
+        </button>
+      </ng-template>
+    </mat-grid-tile>
+    <ng-container *ngIf="selectedApplication">
+      <mat-grid-tile>
+        <h4>Version</h4>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field>
+          <mat-select placeholder="Select Version"
+                      formControlName="version">
+            <mat-option *ngFor="let version of selectedApplication?.Versions"
+                        [value]="version">
+              {{version.Version}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile></mat-grid-tile>
+      <mat-grid-tile>
+        <h4>Build</h4>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field>
+          <mat-select placeholder="Select Build" formControlName="build">
+            <mat-option *ngFor="let build of selectedVersion?.Builds"
+                        [value]="build">
+              {{build?.Build}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile></mat-grid-tile>
+      <mat-grid-tile>
+        <h4>Comment</h4>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        {{ selectedBuild.Comment }}
+      </mat-grid-tile>
+      <mat-grid-tile></mat-grid-tile>
+      <mat-grid-tile>
+        <button class="upload-button" color="primary" mat-button mat-raised-button>
+          Upload configuration
+          <label for="upload">
+            <input type="file" id="upload" accept=".json" (change)="onFileChange($event)">
+          </label>
+        </button>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <button mat-button mat-raised-button color="primary" (click)="downloadConfiguration()">
+          Download configuration
+        </button>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <button mat-button mat-raised-button color="primary" (click)="editUsers()">
+          Edit users
+        </button>
+      </mat-grid-tile>
+    </ng-container>
+  </mat-grid-list>
+</form>

@@ -5,7 +5,15 @@
     "types": [
       "jasmine",
       "node"
-    ]
+    ],
+    "paths": {
+      "@app/*": [
+        "./src/app/*"
+      ],
+      "jszip": [
+        "./node_modules/jszip/dist/jszip.min.js"
+      ]
+    }
   },
   "files": [
     "test.ts",

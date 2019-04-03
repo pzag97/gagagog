@@ -1,0 +1,57 @@
+<h3 *ngIf="params">{{params.app}}/{{params.version}}/{{params.build}}</h3>
+<form *ngIf="form && questions" [formGroup]="form">
+  <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree" #tree>
+    <!-- This is the tree node template for leaf nodes -->
+    <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+      <li class="mat-tree-node">
+        <!-- use a disabled button to provide padding for tree leaf -->
+        <button mat-icon-button disabled></button>
+        <ng-container [ngTemplateOutlet]="control" [ngTemplateOutletContext]="{question: node, formGroup: form}"></ng-container>
+      </li>
+    </mat-tree-node>
+    <!-- This is the tree node template for expandable nodes -->
+    <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
+      <li>
+        <div class="mat-tree-node">
+          <button mat-icon-button matTreeNodeToggle
+                  [attr.aria-label]="'toggle ' + node.name">
+            <mat-icon class="mat-icon-rtl-mirror">
+              {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+            </mat-icon>
+          </button>
+          {{node.label}}
+        </div>
+        <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
+          <ng-container matTreeNodeOutlet></ng-container>
+        </ul>
+      </li>
+    </mat-nested-tree-node>
+  </mat-tree>
+  <div class="button-wrapper">
+    <button type="button" (click)="saveConfiguration()" mat-raised-button color="primary">Save Configuration</button>
+    <button type="button" (click)="uploadConfiguration()" mat-raised-button color="primary">Upload configuration</button>
+  </div>
+</form>
+
+
+<ng-template let-question="question" let-formGroup="formGroup" #control>
+  <ng-container [ngSwitch]="question.type" [formGroup]="form.get(question.formGroupPath)">
+    <ng-container *ngSwitchCase="'text'">
+      <mat-form-field>
+        <label>{{question.label}}</label>
+        <input type="text" [formControlName]="question.key" matInput/>
+      </mat-form-field>
+    </ng-container>
+    <ng-container *ngSwitchCase="'number'">
+      <mat-form-field>
+        <label>{{question.label}}</label>
+        <input type="text" [formControlName]="question.key" matInput/>
+      </mat-form-field>
+    </ng-container>
+    <ng-container *ngSwitchCase="'checkbox'">
+      <mat-checkbox [formControlName]="question.key">
+        {{ question.label }}
+      </mat-checkbox>
+    </ng-container>
+  </ng-container>
+</ng-template>

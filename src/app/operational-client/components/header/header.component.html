@@ -1,0 +1,25 @@
+<nav class="navbar container">
+  <a class="navbar--logo" mat-button routerLink="/">
+    <img src="/assets/img/logo.png"/>
+  </a>
+
+  <ng-container>
+    <a class="navbar--service" mat-button>
+      Manage Server Status
+      <mat-icon class="navbar--icon">power</mat-icon>
+    </a>
+    <a class="navbar--service" mat-button>
+      Consume Server Status
+      <mat-icon class="navbar--icon">power</mat-icon>
+    </a>
+    <a class="navbar--service" mat-button>
+      Reports Server Status
+      <mat-icon class="navbar--icon navbar--icon__off">power_off</mat-icon>
+    </a>
+    <div class="flex-spacer"></div>
+    <div class="navbar--user">
+      Welcome, {{(user$ | async).firstName}}
+    </div>
+    <button mat-button mat-raised-button color="warn" (click)="logout()">Logout</button>
+  </ng-container>
+</nav>

@@ -1,0 +1,52 @@
+@import 'app';
+
+.flex-spacer {
+  flex-grow: 1;
+}
+
+.navbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 8px 10px;
+  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 1px 3px 0 rgba(0, 0, 0, .12);
+  color: black;
+  font-weight: 300;
+
+  &--logo {
+    img {
+      max-width: 100px;
+      background: white;
+      padding: 8px 10px 5px;
+      border-radius: 4px;
+    }
+  }
+
+  &--icon {
+    color: #01d600;
+    &__off {
+      color: #ff3321;
+    }
+
+    &--dashboard {
+      color: $white;
+    }
+  }
+
+  &--service {
+    @media screen and (max-width: 900px) {
+      display: none;
+    }
+  }
+
+  &--title {
+    padding-left: 15px;
+    font-size: 1.8rem;
+    font-weight: 400;
+  }
+
+  &--user {
+    padding-right: 2rem;
+    font-weight: 500;
+  }
+}

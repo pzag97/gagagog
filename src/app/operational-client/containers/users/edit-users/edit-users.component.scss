@@ -1,0 +1,33 @@
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  flex-flow: row;
+  .edit-user-wrapper, .user-list-wrapper {
+    flex: 1 0 50%;
+    padding: 0 20px;
+  }
+  .user-list-wrapper {
+    min-height: 500px;
+    overflow-y: scroll;
+    box-shadow: 0 2px 1px -1px rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 1px 3px 0 rgba(0, 0, 0, .12);
+    border-radius: 4px;
+    mat-radio-button {
+      display: block;
+      margin-bottom: 10px;
+    }
+  }
+  .edit-user-wrapper {
+    mat-form-field {
+      max-width: 400px;
+    }
+    display: flex;
+    flex-flow: column;
+    mat-error{
+      margin-top: 15px;
+    }
+    button {
+      max-width: 200px;
+      margin-top: 15px;
+    }
+  }
+}

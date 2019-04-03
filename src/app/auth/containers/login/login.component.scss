@@ -1,0 +1,46 @@
+.login-container {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-card {
+  height: 500px;
+  width: 500px;
+  padding: 50px 30px;
+
+  mat-card-content {
+    height: 60%;
+  }
+
+  mat-card-footer {
+    margin: 0;
+  }
+
+  &--logo {
+    max-width: 150px;
+    margin-bottom: 15px;
+  }
+  &--header {
+    margin: 0 -16px 15px;
+  }
+  &--title {
+    font-size: 30px;
+  }
+  &--subtitle {
+    font-size: 20px;
+  }
+  &--form-field {
+    width: 100%;
+  }
+  &--submit {
+    width: 100%;
+    margin-top: 15px;
+  }
+  &--copyright {
+    font-size: 12px;
+    color: #9b9b9b;
+  }
+}

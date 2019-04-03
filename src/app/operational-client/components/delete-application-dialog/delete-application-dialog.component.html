@@ -1,0 +1,23 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate *ngIf="form && name">
+  <h1 mat-dialog-title>Are you sure?</h1>
+  <mat-dialog-content>
+    <p>
+      Are you sure you want to delete <b>{{name}}</b>? If so type name of the app and press <b>delete</b> button
+    </p>
+    <mat-form-field>
+      <mat-label>Application Name</mat-label>
+      <input matInput placeholder="com.example.project" formControlName="name"/>
+      <mat-error
+        *ngIf="form.get('name').hasError('notEqual') && !form.get('name').hasError('required')">
+        Names are not equal
+      </mat-error>
+      <mat-error *ngIf="form.get('name').hasError('required')">
+        Application name is required
+      </mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+  <div mat-dialog-actions>
+    <button mat-button mat-raised-button type="submit" color="warn">Delete Application</button>
+    <button mat-button mat-dialog-close>Cancel</button>
+  </div>
+</form>

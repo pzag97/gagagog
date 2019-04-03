@@ -1,0 +1,14 @@
+<div class="operational-client-wrapper">
+  <div class="operational-client">
+    <app-header></app-header>
+    <mat-card class="operational-client--content">
+      <mat-card-title>
+        {{title$ | async}}
+      </mat-card-title>
+      <mat-card-content>
+        <router-outlet></router-outlet>
+      </mat-card-content>
+    </mat-card>
+    <app-footer></app-footer>
+  </div>
+</div>
