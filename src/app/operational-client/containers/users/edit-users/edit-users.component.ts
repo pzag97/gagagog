@@ -1,13 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import * as fromApp from '@app/store/app.reducer';
-import { getAllUsers, getSelectedUser, getUsersError } from '@app/store/app.reducer';
+import { getAllUsers, getUsersError } from '@app/store/app.reducer';
 import * as UsersActions from '@app/users/store/users.actions';
 import { LayoutActions } from '../../../store/actions';
 import { Permissions, User, UserInterface, UserRoles } from '@app/users/models/user';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
+import { getUser } from '@app/store/app.reducer';
 
 @Component({
     selector: 'app-edit-users',
@@ -16,17 +17,21 @@ import { Observable, Subject } from 'rxjs';
 })
 export class EditUsersComponent implements OnInit, OnDestroy {
     users: User[] = [];
-    selectedUser: User;
     form: FormGroup;
     app: string;
     destroy$: Subject<boolean> = new Subject<boolean>();
     error$: Observable<string> = this.store.pipe(select(getUsersError));
+    loggedUser$ = this.store.pipe(select(getUser));
 
     constructor(private store: Store<fromApp.State>, private route: ActivatedRoute) {
     }
 
     get isUserSelected(): boolean {
         return !!this.form.get('username').value;
+    }
+
+    get selectedUsername(): string {
+        return this.form.get('username').value;
     }
 
     ngOnInit() {
@@ -39,7 +44,6 @@ export class EditUsersComponent implements OnInit, OnDestroy {
                 this.form.reset();
             }
         });
-        this.store.pipe(select(getSelectedUser)).subscribe(user => this.selectedUser = user);
         this.initForm();
         this.listenToUsernameChanges();
     }
@@ -91,7 +95,7 @@ export class EditUsersComponent implements OnInit, OnDestroy {
     }
 
     deleteUser() {
-        const user = this.users.find(u => u.username === this.form.get('username').value);
+        const user = this.users.find(u => u.username === this.selectedUsername);
         this.store.dispatch(new UsersActions.DeleteUserRequest({user}));
     }
 

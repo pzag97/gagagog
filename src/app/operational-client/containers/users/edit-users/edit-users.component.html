@@ -3,17 +3,6 @@
   <div class="user-list-wrapper">
     <h4>Users</h4>
     <div class="users-container">
-      <!--<div class="user-item"-->
-           <!--mat-ripple-->
-           <!--*ngFor="let user of (users$ | async)"-->
-           <!--[ngClass]="{'user-item__selected': selectedUser && selectedUser.username === user.username}">-->
-        <!--{{user.username}}-->
-      <!--</div>-->
-      <!--<mat-selection-list #users>-->
-        <!--<mat-list-option *ngFor="let user of (users$ | async)" [selected]="selectedUser && selectedUser.username === user.username">-->
-          <!--{{user.username}}-->
-        <!--</mat-list-option>-->
-      <!--</mat-selection-list>-->
       <mat-radio-group formControlName="username">
         <mat-radio-button [value]="null">New User</mat-radio-button>
         <mat-radio-button *ngFor="let user of users" [value]="user.username">
@@ -40,6 +29,13 @@
     </ng-container>
     <mat-error *ngIf="error$ | async">{{error$ | async}}</mat-error>
     <button mat-button mat-raised-button type="button" (click)="addUser()" color="primary" *ngIf="!isUserSelected">Add User</button>
-    <button mat-button mat-raised-button type="button" (click)="deleteUser()" color="warn" *ngIf="isUserSelected">Delete Selected User</button>
+    <button mat-button
+            mat-raised-button
+            type="button"
+            (click)="deleteUser()"
+            color="warn"
+            *ngIf="isUserSelected && selectedUsername !== (loggedUser$ | async).username">
+      Delete Selected User
+    </button>
   </div>
 </div>

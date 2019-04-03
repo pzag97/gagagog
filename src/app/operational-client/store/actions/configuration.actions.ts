@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { ConfigurationRequestParams } from '@app/operational-client/models/configuration.model';
+import { Configuration, ConfigurationRequestParams } from '@app/operational-client/models/configuration.model';
 
 export enum ActionTypes {
     LoadConfigRequest = '[Configuration] Load Request',
@@ -17,14 +17,14 @@ export class LoadConfigRequest implements Action {
 export class LoadConfigSuccess implements Action {
     readonly type = ActionTypes.LoadConfigSuccess;
 
-    constructor(public payload: { config: object }) {
+    constructor(public payload: { config: Configuration }) {
     }
 }
 
 export class SelectConfig implements Action {
     readonly type = ActionTypes.SelectConfig;
 
-    constructor(public payload: { config: object }) {
+    constructor(public payload: { config: Configuration }) {
     }
 }
 

@@ -16,7 +16,7 @@ describe('AuthActions', () => {
         const payload = {user: new TestUser(), token: 'token'};
         const action = new AuthActions.LoginSuccess(payload);
 
-        expect<AuthActions.LoginSuccess>({...action} as AuthActions.LoginSuccess).toEqual({
+        expect({...action} as AuthActions.LoginSuccess).toEqual({
             type: AuthActions.ActionTypes.LoginSuccess,
             payload
         } as AuthActions.LoginSuccess);
@@ -26,7 +26,7 @@ describe('AuthActions', () => {
         const payload = {error: 'error'};
         const action = new AuthActions.LoginFailed(payload);
 
-        expect<AuthActions.LoginFailed>({...action} as AuthActions.LoginFailed).toEqual({
+        expect({...action} as AuthActions.LoginFailed).toEqual({
             type: AuthActions.ActionTypes.LoginFailed,
             payload
         } as AuthActions.LoginFailed);
@@ -34,21 +34,21 @@ describe('AuthActions', () => {
 
     it('should create LogoutRequest', () => {
         const action = new AuthActions.LogoutRequest();
-        expect<AuthActions.LogoutRequest>({...action} as AuthActions.LogoutRequest).toEqual({
+        expect({...action} as AuthActions.LogoutRequest).toEqual({
             type: AuthActions.ActionTypes.LogoutRequest
         } as AuthActions.LogoutRequest);
     });
 
     it('should create LogoutSuccess', () => {
         const action = new AuthActions.LogoutSuccess();
-        expect<AuthActions.LogoutSuccess>({...action} as AuthActions.LogoutSuccess).toEqual({
+        expect({...action} as AuthActions.LogoutSuccess).toEqual({
             type: AuthActions.ActionTypes.LogoutSuccess
         } as AuthActions.LogoutSuccess);
     });
 
     it('should create LoginRedirect', () => {
         const action = new AuthActions.LoginRedirect();
-        expect<AuthActions.LoginRedirect>({...action} as AuthActions.LoginRedirect).toEqual({
+        expect({...action} as AuthActions.LoginRedirect).toEqual({
             type: AuthActions.ActionTypes.LoginRedirect
         } as AuthActions.LoginRedirect);
     });

@@ -49,6 +49,14 @@ export class AuthEffects {
         )
     );
 
+    @Effect({dispatch: false})
+    logoutSuccess$ = this.actions$.pipe(
+        ofType(AuthActions.ActionTypes.LogoutSuccess),
+        tap(() => {
+            this.authService.clearToken();
+        })
+    );
+
     constructor(
         private actions$: Actions,
         private authService: AuthService,

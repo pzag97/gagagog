@@ -6,6 +6,7 @@ import { catchError, filter, switchMap, take, tap } from 'rxjs/operators';
 import { getSelectedConfiguration } from '@app/operational-client/store/reducers';
 import { ConfigurationActions } from '../store/actions';
 import * as fromApp from '@app/store/app.reducer';
+import { Configuration } from '@app/operational-client/models/configuration.model';
 
 @Injectable()
 export class ConfigurationGuard implements CanActivate {
@@ -16,9 +17,8 @@ export class ConfigurationGuard implements CanActivate {
     getFromStoreOrAPI(route: ActivatedRouteSnapshot): Observable<any> {
         return this.store.pipe(
             select(getSelectedConfiguration),
-            tap((config: object) => {
+            tap((config: Configuration) => {
                 if (!config) {
-                    console.log(route.params);
                     const {app, version, build} = route.params;
                     this.store.dispatch(new ConfigurationActions.LoadConfigRequest({
                         params: {

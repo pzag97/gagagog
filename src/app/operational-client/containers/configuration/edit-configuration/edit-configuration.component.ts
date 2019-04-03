@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { getSelectedConfiguration } from '@app/operational-client/store/reducers';
@@ -10,6 +10,8 @@ import * as fromApp from '@app/store/app.reducer';
 import { LayoutActions } from '../../../store/actions';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ConfigurationService } from '@app/operational-client/services/configuration.service';
+import { Configuration } from '@app/operational-client/models/configuration.model';
+import { HelperService } from '@app/core/services/helper.service';
 
 class Question {
     label: string;
@@ -86,8 +88,8 @@ export class EditConfigurationComponent implements OnInit, OnDestroy {
             .subscribe();
     }
 
-    buildQuestions(configuration: object) {
-        if (!this.isObject(configuration)) {
+    buildQuestions(configuration: Configuration) {
+        if (!HelperService.isObject(configuration)) {
             return;
         }
         const questions = [];
@@ -96,10 +98,10 @@ export class EditConfigurationComponent implements OnInit, OnDestroy {
             let type: string;
             let childQuestions: Question[] = [];
             let value: string | number | boolean;
-            if (this.isObject(obj)) {
-                childQuestions = this.buildQuestions(obj);
+            if (HelperService.isObject(obj)) {
+                childQuestions = this.buildQuestions(obj as Configuration);
             } else {
-                value = obj;
+                value = obj as string | number | boolean;
                 type = this.getQuestionType(value);
             }
             questions.push(new Question({label: key, value, type, key, questions: childQuestions}));
@@ -130,11 +132,6 @@ export class EditConfigurationComponent implements OnInit, OnDestroy {
             }
         });
         return new FormGroup(group);
-    }
-
-    isObject(obj: any) {
-        const type = typeof obj;
-        return type === 'object' && !!obj;
     }
 
     ngOnDestroy() {

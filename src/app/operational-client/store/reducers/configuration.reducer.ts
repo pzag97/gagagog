@@ -1,7 +1,8 @@
 import { ConfigurationActions } from '../actions';
+import { Configuration } from '@app/operational-client/models/configuration.model';
 
 export interface State {
-    selectedConfiguration: object;
+    selectedConfiguration: Configuration;
 }
 
 export const initialState: State = {

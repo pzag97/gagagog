@@ -36,12 +36,13 @@ export class User {
     permissions: Permissions = {};
 
     constructor(options: UserInterface) {
-        this.firstName = options.firstName || '';
-        this.lastName = options.lastName || '';
-        this.role = options.role || UserRoles.User;
-        this.permissions = options.permissions || {};
-        this.username = options.username;
-        this.password = options.password;
+        const {firstName = '', lastName = '', role = UserRoles.User, permissions = {}, username, password} = options;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.role = role;
+        this.permissions = permissions;
+        this.username = username;
+        this.password = password;
     }
 
     getPermissionsForApp(app: string) {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { ConfigurationRequestParams } from '../models/configuration.model';
+import { Configuration, ConfigurationRequestParams } from '../models/configuration.model';
 import { DownloadService } from '@app/core/services/download.service';
 import configurationMock from '../mocks/configuration-mock.json';
 
@@ -10,7 +10,7 @@ export class ConfigurationService {
     constructor(private downloadService: DownloadService) {
     }
 
-    fetchConfiguration(params: ConfigurationRequestParams): Observable<object> {
+    fetchConfiguration(params: ConfigurationRequestParams): Observable<Configuration> {
         let config = this.getFromStorage(params);
         if (!config) {
             config = configurationMock;
@@ -19,20 +19,20 @@ export class ConfigurationService {
         return of(config);
     }
 
-    downloadConfiguration(configuration: object, name?: string) {
+    downloadConfiguration(configuration: Configuration, name?: string) {
         return this.downloadService.downloadAsZip(JSON.stringify(configuration), name);
     }
 
-    uploadConfiguration(params: ConfigurationRequestParams, config: object) {
+    uploadConfiguration(params: ConfigurationRequestParams, config: Configuration) {
         this.updateStorage(params, config);
         return of({success: true});
     }
 
-    private getFromStorage(params: ConfigurationRequestParams): object {
+    private getFromStorage(params: ConfigurationRequestParams): Configuration {
         return JSON.parse(localStorage.getItem(this.configParamsToKey(params)));
     }
 
-    private updateStorage(params: ConfigurationRequestParams, config: object) {
+    private updateStorage(params: ConfigurationRequestParams, config: Configuration) {
         localStorage.setItem(this.configParamsToKey(params), JSON.stringify(config));
     }
 
