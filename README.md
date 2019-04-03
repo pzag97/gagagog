@@ -9,6 +9,9 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 ## Server communications
 All requests are mocked using observables and localStorage API.
 
+## Store
+The app is built with @ngrx/store. You can start the app in development mode to inspect app's state using Redux Devtools.
+
 ## Authorization
 
 By default there is only one user. These are credentials for admin account:
